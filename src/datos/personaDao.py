@@ -3,6 +3,7 @@ from src.dominio.persona import Persona
 
 
 class PersonaDao:
+    _ERROR_ = -1
     _INSERT = ("INSERT INTO Persona (Nombre, apellido, cedula,"
                "Sexo, email) values (?, ?, ?, ?, ?)")
 
@@ -22,6 +23,9 @@ class PersonaDao:
 
         except Exception as e:
             print(e)
+            cursor.rollback()
+            return cls._ERROR_
+
 
 
 if __name__ == '__main__':
